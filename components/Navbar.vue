@@ -1,18 +1,50 @@
 <template>
-  <header class="text-white body-font bg-secondary">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a class="flex title-font font-medium items-center text-primary mb-4 md:mb-0">
-        <span class="ml-3 text-xl">Code for Yay!</span>
-      </a>
-      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <a class="mr-5 hover:text-gray-400">First Link</a>
-        <a class="mr-5 hover:text-gray-400">Second Link</a>
-        <a class="mr-5 hover:text-gray-400">Third Link</a>
-        <a class="mr-5 hover:text-gray-400">Fourth Link</a>
-      </nav>
-      <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-        Button
-      </button>
+  <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-secondary">
+    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+      <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
+        <a class="text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-primary" href="/">
+          Code for Yay
+        </a>
+        <button class="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button" @click="toggleNavbar()">
+          <font-awesome-icon icon="bars" />
+        </button>
+      </div>
+      <div :class="{'hidden': !showMenu, 'flex': showMenu}" class="lg:flex lg:flex-grow items-center">
+        <ul class="flex flex-col lg:flex-row list-none ml-auto">
+          <li class="nav-item">
+            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+              <span class="ml-2">Share</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+              <span class="ml-2">Tweet</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+              <span class="ml-2">Pin</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
   </header>
 </template>
+
+<script>
+export default {
+  name: 'GrayNavbar',
+  data () {
+    return {
+      showMenu: false
+    }
+  },
+  methods: {
+    toggleNavbar () {
+      this.showMenu = !this.showMenu
+    }
+  }
+}
+</script>
