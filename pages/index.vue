@@ -3,6 +3,7 @@
     <Navbar />
     <section id="hero" class="hero text-gray-300 body-font bg-secondary">
       <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+        <img class="object-contain h-64 w-full " src="~/assets/code-for-yay-square.png" alt="">
         <div class="text-center lg:w-2/3 w-full">
           <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-primary">
             We make something fun, by the fun, for the fun.
@@ -20,8 +21,11 @@
             Members
           </h1>
         </div>
-        <div class="flex flex-wrap -m-4">
-          <div v-for="member in members" :key="member.id" class="p-4 lg:w-1/4 md:w-1/2 ">
+        <div v-show="loading" class="loader">
+          Loading...
+        </div>
+        <div v-show="!loading" class="flex flex-wrap justify-center">
+          <div v-for="member in members" :key="member.id" class="p-4 lg:w-1/4 md:w-1/2">
             <img alt="team" class="flex-shrink-0 rounded-t-lg w-full h-56 object-cover object-center" :src="member.profile.url">
             <div class="p-6 bg-white rounded-b-lg shadow-lg">
               <div class="h-full bg-white flex flex-col items-center text-center">
@@ -134,16 +138,20 @@ import axios from 'axios'
 
 export default Vue.extend({
   name: 'Index',
+  components: {
+  },
   data () {
     return {
       members: [],
-      error: null
+      error: null,
+      loading: true
     }
   },
   async mounted () {
     try {
-      const response = await axios.get('https://code4yay-strapi.herokuapp.com/members')
+      const response = await axios.get('https://strapi.code4yay.dev//members')
       this.members = response.data
+      this.loading = false
     } catch (error) {
       this.error = error
     }
@@ -152,4 +160,84 @@ export default Vue.extend({
 </script>
 
 <style>
+  .loader {
+    color: #39e991;
+    font-size: 90px;
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 72px auto;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+    animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  }
+  @-webkit-keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+  }
+  @keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+  }
+  @-webkit-keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 </style>
