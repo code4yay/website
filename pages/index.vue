@@ -1,134 +1,91 @@
 <template>
   <div>
-    <Navbar />
-    <section id="hero" class="hero text-gray-300 body-font bg-secondary">
-      <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-        <img class="object-contain h-64 w-full " src="~/assets/code-for-yay-square.png" alt="">
-        <div class="text-center lg:w-2/3 w-full">
-          <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-primary">
-            We make something fun, by the fun, for the fun.
-          </h1>
-          <p class="mb-8 leading-relaxed">
-            Code for Yay は楽しいものを楽しむために楽しく作るクリエイターグループです。
-          </p>
+    <div v-show="loading" class="loader">
+      Loading...
+    </div>
+    <div v-show="!loading">
+      <Navbar />
+      <section id="hero" class="hero text-gray-300 body-font bg-secondary">
+        <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+          <img class="object-contain h-64 w-full " src="~/assets/code-for-yay-square.png" alt="">
+          <div class="text-center lg:w-2/3 w-full">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-primary">
+              We make something fun, by the fun, for the fun.
+            </h1>
+            <p class="mb-8 leading-relaxed">
+              Code for Yay は楽しいものを楽しむために楽しく作るクリエイターグループです。
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
-    <section id="members" class="text-gray-600 body-font bg-gray-100">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-col text-center w-full mb-10">
-          <h1 class="text-2xl font-medium title-font text-gray-900">
-            Members
-          </h1>
-        </div>
-        <div v-show="loading" class="loader">
-          Loading...
-        </div>
-        <div v-show="!loading" class="flex flex-wrap justify-center">
-          <div v-for="member in members" :key="member.id" class="p-4 lg:w-1/4 md:w-1/2">
-            <img alt="team" class="flex-shrink-0 rounded-t-lg w-full h-56 object-cover object-center" :src="member.profile.url">
-            <div class="p-6 bg-white rounded-b-lg shadow-lg">
-              <div class="h-full bg-white flex flex-col items-center text-center">
-                <div class="w-full">
-                  <h2 class="title-font font-medium text-lg text-gray-900">
-                    {{ member.name }}
-                  </h2>
-                  <h3 class="text-gray-500 mb-3">
-                    {{ member.role }}
-                  </h3>
-                  <div class="socials">
-                    <a v-if="member.twitter" :href="`https://twitter.com/${ member.twitter }`">
-                      <font-awesome-layers class="fa-2x">
-                        <font-awesome-icon :icon="['fab', 'twitter']" />
-                      </font-awesome-layers>
-                    </a>
-                    <a v-if="member.github" :href="`https://github.com/${ member.github }`">
-                      <font-awesome-layers class="fa-2x">
-                        <font-awesome-icon :icon="['fab', 'github']" />
-                      </font-awesome-layers>
-                    </a>
-                    <a v-if="member.link" :href="member.link">
-                      <font-awesome-layers class="fa-2x">
-                        <font-awesome-icon icon="link" />
-                      </font-awesome-layers>
-                    </a>
+      </section>
+      <section id="members" class="text-gray-600 body-font bg-gray-100">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-10">
+            <h1 class="text-2xl font-medium title-font text-gray-900">
+              Members
+            </h1>
+          </div>
+          <div class="flex flex-wrap justify-center">
+            <div v-for="member in members" :key="member.id" class="p-4 lg:w-1/4 md:w-1/2">
+              <img alt="team" class="flex-shrink-0 rounded-t-lg w-full h-56 object-cover object-center" :src="member.profile.url">
+              <div class="p-6 bg-white rounded-b-lg shadow-lg">
+                <div class="h-full bg-white flex flex-col items-center text-center">
+                  <div class="w-full">
+                    <h2 class="title-font font-medium text-lg text-gray-900">
+                      {{ member.name }}
+                    </h2>
+                    <h3 class="text-gray-500 mb-3">
+                      {{ member.role }}
+                    </h3>
+                    <div class="socials">
+                      <a v-if="member.twitter" :href="`https://twitter.com/${ member.twitter }`">
+                        <font-awesome-layers class="fa-2x">
+                          <font-awesome-icon :icon="['fab', 'twitter']" />
+                        </font-awesome-layers>
+                      </a>
+                      <a v-if="member.github" :href="`https://github.com/${ member.github }`">
+                        <font-awesome-layers class="fa-2x">
+                          <font-awesome-icon :icon="['fab', 'github']" />
+                        </font-awesome-layers>
+                      </a>
+                      <a v-if="member.link" :href="member.link">
+                        <font-awesome-layers class="fa-2x">
+                          <font-awesome-icon icon="link" />
+                        </font-awesome-layers>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section id="works" class="text-gray-600 body-font bg-gray-300">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap w-full mb-10">
-          <div class="flex flex-col text-center w-full">
+      </section>
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-10">
             <h1 class="text-2xl font-medium title-font text-gray-900">
-              Works
+              News
             </h1>
           </div>
-        </div>
-        <div class="flex flex-wrap -m-4">
-          <div class="xl:w-1/4 md:w-1/2 p-4">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <img class="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/720x400" alt="content">
-              <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
-                SUBTITLE
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                Chichen Itza
-              </h2>
-              <p class="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
-              </p>
-            </div>
-          </div>
-          <div class="xl:w-1/4 md:w-1/2 p-4">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <img class="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/721x401" alt="content">
-              <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
-                SUBTITLE
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                Colosseum Roma
-              </h2>
-              <p class="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
-              </p>
-            </div>
-          </div>
-          <div class="xl:w-1/4 md:w-1/2 p-4">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <img class="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/722x402" alt="content">
-              <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
-                SUBTITLE
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                Great Pyramid of Giza
-              </h2>
-              <p class="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
-              </p>
-            </div>
-          </div>
-          <div class="xl:w-1/4 md:w-1/2 p-4">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <img class="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/723x403" alt="content">
-              <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
-                SUBTITLE
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                San Francisco
-              </h2>
-              <p class="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
-              </p>
+          <div class="flex flex-wrap -m-4">
+            <div v-for="article in articles" :key="article.id" class="p-4 md:w-1/3">
+              <div class="h-full shadow-lg rounded-lg overflow-hidden">
+                <img class="lg:h-56 md:h-48 w-full object-cover object-center" :src="article.thumbnail.url" alt="blog">
+                <div class="p-6">
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+                    <a :href="`/articles/${ article.id }`">{{ article.title }}</a>
+                  </h1>
+                  <p class="leading-relaxed mb-3">
+                    {{ article.descriptions }}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -143,14 +100,18 @@ export default Vue.extend({
   data () {
     return {
       members: [],
+      articles: [],
       error: null,
       loading: true
     }
   },
   async mounted () {
     try {
-      const response = await axios.get('https://strapi.code4yay.dev//members')
-      this.members = response.data
+      const membersRes = await axios.get('https://strapi.code4yay.dev/members')
+      this.members = membersRes.data
+      const articlesRes = await axios.get('https://strapi.code4yay.dev/articles')
+      this.articles = articlesRes.data
+
       this.loading = false
     } catch (error) {
       this.error = error
@@ -168,7 +129,7 @@ export default Vue.extend({
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    margin: 72px auto;
+    margin: 40vh auto;
     position: relative;
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);

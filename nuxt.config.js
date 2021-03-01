@@ -3,9 +3,9 @@ import * as FontAwesome from './fontawesome'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'website',
+    title: 'Code for Yay',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -22,7 +22,9 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '@/plugins/dateformat'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -47,7 +49,11 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['@nuxtjs/google-adsense', {
+      id: 'ca-pub-8773051250991531'
+    }],
+    '@nuxtjs/markdownit'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
