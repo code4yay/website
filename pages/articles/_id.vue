@@ -38,16 +38,12 @@ export default Vue.extend({
   },
   data () {
     return {
-      article: {
-        body: 'c4y',
-        published_at: '2021-03-01T10:01:18.166Z',
-        updated_at: '2021-03-01T10:01:18.166Z'
-      },
+      article: {},
       error: null,
       loading: true
     }
   },
-  async mounted () {
+  async fetch () {
     try {
       const articlesRes = await axios.get(`https://strapi.code4yay.dev/articles/${this.$route.params.id}`)
       this.article = articlesRes.data

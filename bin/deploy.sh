@@ -1,0 +1,1 @@
+gcloud run deploy --image=gcr.io/code4yay/website:latest --platform managed --port 8080 --region us-central1

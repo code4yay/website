@@ -105,7 +105,7 @@ export default Vue.extend({
       loading: true
     }
   },
-  async mounted () {
+  async fetch () {
     try {
       const membersRes = await axios.get('https://strapi.code4yay.dev/members')
       this.members = membersRes.data
